@@ -1,0 +1,25 @@
+#!/bin/zsh
+VIM_DIR="${ZDOTDIR:-$HOME}/.vim"
+PRESTO_DIR="${ZDOTDIR:-$HOME}/.zprezto"
+RUN_DIR="${0:A:h}"
+
+mkdir $VIM_DIR
+
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "$PRESTO_DIR"
+setopt EXTENDED_GLOB
+for rcfile in "$PRESTO_DIR"/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+chsh -s /bin/zsh
+
+echo "export VIM_DIR=$VIM_DIR" >> "$PRESTO_DIR"/runcoms/zprofile
+echo "source ~/.profile" >> "$PRESTO_DIR"/runcoms/zshrc
+
+export VIM_DIR
+
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "$RUN_DIR"/installer.sh
+
+sh "$RUN_DIR"/installer.sh "$VIM_DIR"
+
+ln -s "$RUN_DIR/vimrc" "${ZDOTDIR:-$HOME}/.vimrc"
