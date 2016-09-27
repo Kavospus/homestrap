@@ -1,3 +1,17 @@
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+let dein_dir=$VIM_DIR . "/dein"
+
+let dein_repo=dein_dir . "/repos/github.com/Shougo/dein.vim"
+
+" Required:
+let &runtimepath.="," . dein_repo
+
+" Required:
+call dein#begin(dein_dir)
+
 " Let dein manage dein
 " Required:
 call dein#add('Shougo/dein.vim')
@@ -66,6 +80,7 @@ map <Down>  :echo "no!"<cr>
 set clipboard=unnamedplus
 nnoremap ; :
 vnoremap ; :
+inoremap hl <esc>
 " nnoremap <cr> :nohlsearch<cr>
 
 nnoremap J mzJ`z

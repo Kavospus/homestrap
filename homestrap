@@ -3,6 +3,8 @@ VIM_DIR="${ZDOTDIR:-$HOME}/.vim"
 PRESTO_DIR="${ZDOTDIR:-$HOME}/.zprezto"
 RUN_DIR="${0:A:h}"
 
+export VIM_DIR
+
 mkdir -p $VIM_DIR/dein
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "$PRESTO_DIR"
@@ -11,12 +13,11 @@ for rcfile in "$PRESTO_DIR"/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
-cat "$RUN_DIR"/vimhead > "$RUN_DIR"/vimrc
+rm "${ZDOTDIR:-$HOME}/.zpreztorc"
 
-echo "set runtimepath+=$VIM_DIR/dein/repos/github.com/Shougo/dein.vim" >> "$RUN_DIR"/vimrc
-echo "call dein#begin('$VIM_DIR/dein')" >> "$RUN_DIR"/vimrc
+ln -s "$RUN_DIR"/zpreztorc "${ZDOTDIR:-$HOME}/.zpreztorc"
 
-cat "$RUN_DIR/vimtail" >> "$RUN_DIR"/vimrc
+echo "export VIM_DIR=$VIM_DIR" >> "$PRESTO_DIR"/runcoms/zshrc
 
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "$RUN_DIR"/installer.sh
 
