@@ -38,7 +38,9 @@ call dein#add('janko-m/vim-test')
 call dein#add('terryma/vim-multiple-cursors')
 call dein#add('rust-lang/rust.vim')
 call dein#add('ntpeters/vim-better-whitespace')
-
+call dein#add('peterhoeg/vim-qml')
+call dein#add('farseer90718/vim-taskwarrior')
+call dein#add('posva/vim-vue')
 " You can specify revision/branch/tag.
 "call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
